@@ -1,0 +1,57 @@
+.idea/
+dist/
+
+### Maven Related ###
+target/
+*/*/target/*
+*/target/*
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS/Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+
+
+#class files
+*.class
+
+#log files
+*.log
+
+#migration files
+*.ddl
+
+# Untracked specific application files and directories:
+**/.mypy_cache
+manual/python/test_results
+e2e-test/reports/
+venv/
+venv3/
+**/target
+
+### Maven Related ###
+target/
+*/*/target/*
+*/target/*
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS/Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+
+
