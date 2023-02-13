@@ -16,13 +16,14 @@ import static com.epam.learn.KafkaUtil.setClosingShutdownHookForConsumer;
 
 public class SimpleKafkaConsumer {
 
+    private final Logger logger;
     private final String bootstrapServer;
     private static final String CONSUMER_GROUP = "first-task-consumer";
     private static final String AUTO_OFFSET_OPTION = "earliest";
+    private static final String SMALLEST_AUTOCOMMIT_INTERVAL = "100";
 
     private KafkaConsumer<String, String> consumer;
 
-    private Logger logger;
 
     public SimpleKafkaConsumer(String bootstrapServer, Logger logger) {
         this.bootstrapServer = bootstrapServer;
@@ -47,6 +48,9 @@ public class SimpleKafkaConsumer {
         }
     }
 
+    /**
+    Implements a configuration for the "at most once" Kafka consumer
+     */
     private void initConsumer() {
         Properties properties = new Properties();
         properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
@@ -54,6 +58,8 @@ public class SimpleKafkaConsumer {
         properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, CONSUMER_GROUP);
         properties.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, AUTO_OFFSET_OPTION);
+        properties.setProperty(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "true");
+        properties.setProperty(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, SMALLEST_AUTOCOMMIT_INTERVAL);
         this.consumer = new KafkaConsumer<>(properties);
         setClosingShutdownHookForConsumer(this.consumer);
     }
